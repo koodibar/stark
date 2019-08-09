@@ -28,6 +28,8 @@ defmodule Stark do
   end
 
   def write_html(body) do
-    File.write("outputs/simple.html", body)
+    {:ok, template} = File.read("templates/base.html")
+    output = String.replace(template, "{{>content}}", body)
+    File.write("outputs/simple.html", output)
   end
 end
